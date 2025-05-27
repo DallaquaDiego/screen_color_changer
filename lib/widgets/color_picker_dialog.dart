@@ -57,36 +57,40 @@ Future<void> showCustomColorPicker({
             color: Color(0xFFD84315),
           ),
         ),
-        // List of color options displayed as circular swatches
+        // Centralized grid of color options
         content: SingleChildScrollView(
-          child: Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: colorOptions.map((color) {
-              return GestureDetector(
-                onTap: () {
-                  // Close the dialog and return the selected color
-                  Navigator.of(context).pop();
-                  onColorSelected(color);
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: currentColor == color
-                          ? Colors.black
-                          : Colors.transparent,
-                      width: 2,
+          child: Center(
+            child: Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              alignment: WrapAlignment.center,
+              children: colorOptions.map((color) {
+                return GestureDetector(
+                  onTap: () {
+                    // Close the dialog and return the selected color
+                    Navigator.of(context).pop();
+                    onColorSelected(color);
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: currentColor == color
+                            ? Colors.black
+                            : Colors.transparent,
+                        width: 2,
+                      ),
                     ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
+            ),
           ),
         ),
+
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
